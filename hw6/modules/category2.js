@@ -1,0 +1,11 @@
+module.exports={
+    number:
+    [{
+        name:'KorFood',
+        idx:1
+    },{
+        name:'ZzimFood',
+        idx:5
+    }
+]
+}
