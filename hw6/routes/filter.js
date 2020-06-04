@@ -16,31 +16,39 @@ router.get('/',async(req,res)=>{
     } = req.body;
 
     const getStore = await Store.getAll();
+    const getRatingStore = await Store.getRatingByIdx();
     let returnData=[];
     
-    function ratingFunc(item1, item2){
-        item1.rating-item2.rating;
-    }
-    function deliveryMoneyFunc(item1,item2){
-        item1.delivery_money-item2.deliveryMoney;
-    }
-
-    getStore.forEach(item=>{
-        if(item.avg_delivery_time>time_min && item.avg_delivery_time < time_max){
+    // function ratingFunc(item1, item2){
+    //     item1["rating"]-item2["rating"];
+    // }
+    // function deliveryMoneyFunc(item1,item2){
+    //     item1["delivery_money"]-item2["deliveryMoney"];
+    // }
+    if(time_min&&time_max&&sort_type){
+    getRatingStore.forEach(item=>{
+        if(item.avg_delivery_time>time_min && item.avg_delivery_time < time_max && sort_type=="rating"){
             returnData.push(item);
-            if(sort_type!=null){
-                switch(sort_type){ // sort_type 이 안먹는다
-                    case "rating":
-                        returnData.sort(ratingFunc);
-                        break;
-                    case "delivery_money":
-                        returnData.sort(deliveryMoneyFunc);
-                        break;
-                }
-            }
         }
     })
     res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.OK,{result:returnData}))
+}
+    else if(time_max&&time_min){
+    getStore.forEach(item=>{
+        if(item.avg_delivery_time>time_min && item.avg_delivery_time < time_max){
+            returnData.push(item);
+        }
+    })
+    res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.OK,{result:returnData}))
+    }
+    else if(sort_type){
+        getRatingStore.forEach(item=>{
+            if(sort_type=="rating"){
+                returnData.push(item);
+            }
+        })
+        res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.OK,{result:returnData}))
+        }
 })
 
 module.exports=router;

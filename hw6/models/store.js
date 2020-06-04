@@ -33,6 +33,18 @@ const store = {
         console.log('getAll err ',err);
         }
     },
+    getRatingByIdx: async()=>{
+        const query = `SELECT * FROM ${table} ORDER BY rating DESC`;
+        try{
+            const result = await pool.queryParam(query);
+            return result;
+        }catch(err){
+            if(err.errno==1062){
+                console.log('getRatingByIdx error :',err.errno,err.code);
+            }
+        console.log('getRatingByIdx err ',err);
+        }
+    },
     getUserByIdx: async(idx)=>{
         const query = `SELECT * FROM ${table} WHERE storeIdx="${idx}"`;
         try{
