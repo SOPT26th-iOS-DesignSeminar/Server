@@ -58,7 +58,7 @@ exports.update = async(req,res)=>{
     } = req.body;
 
     const result= await Store.update(updateIdx,sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee);
-    const changedData = await Store.getUserByIdx(updateIdx);
+    const changedData = await Store.getStoreByIdx(updateIdx);
 
     res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.OK,{changedData:changedData}))
 }

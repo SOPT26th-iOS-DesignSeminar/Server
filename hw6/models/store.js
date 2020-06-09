@@ -49,7 +49,7 @@ const store = {
     },
     update: async(idx,sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee)=>{
         
-        const query = `UPDATE ${table} SET sub_category_idx="${sub_category_idx}, "name="${name}", address="${address}", avg_delivery_time="${avg_delivery_time}",
+        const query = `UPDATE ${table} SET sub_category_idx=${sub_category_idx}, name="${name}", address="${address}", avg_delivery_time="${avg_delivery_time}",
         cheeta_delivery="${cheeta_delivery}",rating="${rating}",introduce="${introduce}",picture="${picture}",delivery_fee="${delivery_fee}"
         WHERE idx = "${idx}"`;
 

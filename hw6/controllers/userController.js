@@ -7,7 +7,7 @@ exports.signup= async(req,res)=>{ // users 값 저장이 0으로 됨
     const {location} = req.body;
     
     if(!location){
-        res.status(statusCode.OK).send(util.fail(statusCode.fail(statusCode.BAD_REQUEST,responseMessage.NULL_VALUE)))
+        res.status(statusCode.OK).send(util.fail(statusCode.BAD_REQUEST,responseMessage.NULL_VALUE))
     }
 
     const result = await User.signup(location);
