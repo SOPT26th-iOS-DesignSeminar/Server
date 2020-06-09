@@ -1,7 +1,7 @@
-let responseMessage = require('../modules/responseMessage');
-let statusCode = require('../modules/statusCode');
-let util = require('../modules/util');
-let User = require('../models/user');
+const responseMessage = require('../modules/responseMessage');
+const statusCode = require('../modules/statusCode');
+const util = require('../modules/util');
+const User = require('../models/user');
 
 exports.signup= async(req,res)=>{ // users 값 저장이 0으로 됨
     const {location} = req.body;

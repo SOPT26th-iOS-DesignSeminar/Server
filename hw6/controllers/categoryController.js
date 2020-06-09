@@ -1,6 +1,6 @@
-let responseMessage = require('../modules/responseMessage');
-let statusCode = require('../modules/statusCode');
-let util = require('../modules/util');
+const responseMessage = require('../modules/responseMessage');
+const statusCode = require('../modules/statusCode');
+const util = require('../modules/util');
 const Main_category = require('../models/main_category')
 const Sub_category = require('../models/sub_category')
 

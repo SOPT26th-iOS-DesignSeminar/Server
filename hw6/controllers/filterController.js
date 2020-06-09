@@ -1,8 +1,8 @@
-let responseMessage = require('../modules/responseMessage');
-let statusCode = require('../modules/statusCode');
-let util = require('../modules/util');
+const responseMessage = require('../modules/responseMessage');
+const statusCode = require('../modules/statusCode');
+const util = require('../modules/util');
 
-let Store = require('../models/store');
+const Store = require('../models/store');
 
 exports.getStoreByFilter = async(req,res)=>{
     const{

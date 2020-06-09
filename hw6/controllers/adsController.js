@@ -1,6 +1,6 @@
-let responseMessage = require('../modules/responseMessage');
-let statusCode = require('../modules/statusCode');
-let util = require('../modules/util');
+const responseMessage = require('../modules/responseMessage');
+const statusCode = require('../modules/statusCode');
+const util = require('../modules/util');
 const Ads = require('../models/ads')
 
 exports.getAllAds = async(req,res)=>{
