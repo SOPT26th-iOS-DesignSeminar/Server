@@ -2,11 +2,11 @@ const pool = require('../modules/pool')
 const table = 'store';
 
 const store = {
-    signup: async(name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_money,category_1Idx,category_2Idx)=>{
+    signup: async(sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee)=>{
 
-        const questions = '?,?,?,?,?,?,?,?,?,?';
-        const values = [name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_money,category_1Idx,category_2Idx];
-        const fields = 'name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_money,category_1Idx,category_2Idx'
+        const questions = '?,?,?,?,?,?,?,?,?';
+        const values = [sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee];
+        const fields = 'sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee'
 
         const query = `INSERT INTO ${table}(${fields}) VALUES (${questions})`;
 
@@ -33,38 +33,25 @@ const store = {
         console.log('getAll err ',err);
         }
     },
-    getRatingByIdx: async()=>{
-        const query = `SELECT * FROM ${table} ORDER BY rating DESC`;
+    getStoreByName: async(name)=>{
+        const query = `SELECT * FROM ${table} WHERE name="${name}"`;
+        console.log(query)
         try{
             const result = await pool.queryParam(query);
+            console.log(result)
             return result;
         }catch(err){
             if(err.errno==1062){
-                console.log('getRatingByIdx error :',err.errno,err.code);
+                console.log('getStoreByName error :',err.errno,err.code);
             }
-        console.log('getRatingByIdx err ',err);
+        console.log('getStoreByName err ',err);
         }
     },
-    getUserByIdx: async(idx)=>{
-        const query = `SELECT * FROM ${table} WHERE storeIdx="${idx}"`;
-        try{
-            const result = await pool.queryParam(query);
-            return result;
-        }catch(err){
-            if(err.errno==1062){
-                console.log('getUserByName error :',err.errno,err.code);
-            }
-        console.log('getUserByName err ',err);
-        }
-    },
-    update: async(idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_money,category_1,category_2)=>{
-        const values = [name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_money,category_1,category_2];
-        const fields = 'name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_money,category_1,category_2'
+    update: async(idx,sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee)=>{
         
-        const query = `UPDATE ${table} SET name="${name}", address="${address}", avg_delivery_time="${avg_delivery_time}",
-        cheeta_delivery="${cheeta_delivery}",rating="${rating}",introduce="${introduce}",picture="${picture}",delivery_money="${delivery_money}",
-        category_1="${category_1}",category_2="${category_2}"
-        WHERE storeIdx = "${idx}"`;
+        const query = `UPDATE ${table} SET sub_category_idx="${sub_category_idx}, "name="${name}", address="${address}", avg_delivery_time="${avg_delivery_time}",
+        cheeta_delivery="${cheeta_delivery}",rating="${rating}",introduce="${introduce}",picture="${picture}",delivery_fee="${delivery_fee}"
+        WHERE idx = "${idx}"`;
 
         try{
             const result = await pool.queryParam(query);
@@ -78,7 +65,7 @@ const store = {
         }
     },
     delete: async(idx)=>{
-        const query = `DELETE FROM ${table} WHERE storeIdx="${idx}" `;
+        const query = `DELETE FROM ${table} WHERE idx="${idx}" `;
         try{
             const result = await pool.queryParam(query);
             return result;
@@ -87,6 +74,50 @@ const store = {
                 console.log('delete error :',err.errno,err.code);
             }
         console.log('delete err ',err);
+        }
+    },
+    getStoreByRating: async(sortIdx)=>{
+        const query = `SELECT * FROM ${table} ORDER BY rating DESC`
+        let returnResult = [];
+        try{
+            const result = await pool.queryParam(query);
+            for(i=0;i<sortIdx.length;i++){
+                for(j=0;j<result.length;j++){
+                    if(sortIdx[i]===result[j].idx){
+                        returnResult.push(result[j])
+                    }
+                }
+            }
+            return resultResult;
+        }catch(err){
+            if(err.errno==1062){
+                console.log('getStoreByRating error :',err.errno,err.code);
+            }
+        console.log('getStoreByRating err ',err);
+        }
+    },
+    getStoreByDeliveryFee: async(sortIdx)=>{
+        const query = `SELECT * FROM ${table} ORDER BY delivery_fee DESC`;
+        try{
+            const result = await pool.queryParam(query);
+            return result;
+        }catch(err){
+            if(err.errno==1062){
+                console.log('getStoreByDeliveryFee error :',err.errno,err.code);
+            }
+        console.log('getStoreByDeliveryFee err ',err);
+        }
+    },
+    getStoreByIdx: async(idx)=>{
+        const query = `SELECT * FROM ${table} WHERE idx=${idx}`
+        try{
+            const result = await pool.queryParam(query);
+            return result;
+        }catch(err){
+            if(err.errno==1062){
+                console.log('getStoreByIdx error :',err.errno,err.code);
+            }
+        console.log('getStoreByIdx err ',err);
         }
     }
 }

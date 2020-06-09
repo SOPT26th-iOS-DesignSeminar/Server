@@ -1,19 +1,20 @@
 const pool = require('../modules/pool');
-const table = 'zzimFood';
+const table = 'main_category';
 
-const zzimFood = {
-    getAll: async(req,res)=>{
+const main_category = {
+    getAll : async ()=>{
         const query = `SELECT * FROM ${table}`;
+
         try{
             const result = await pool.queryParam(query);
             return result;
         }catch(err){
             if(err.errno==1062){
-                console.log("get data error ",err.errno,err.data);
+                console.log('signup error :',err.errno,err.code);
             }
-            console.log("get data error",err)
+        console.log('signup err ',err);
         }
     }
 }
 
-module.exports = zzimFood;
+module.exports=main_category;

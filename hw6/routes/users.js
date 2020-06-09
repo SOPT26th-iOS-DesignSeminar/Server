@@ -5,18 +5,12 @@ let util = require('../modules/util');
 let statusCode = require('../modules/statusCode');
 let responseMessage = require('../modules/responseMessage');
 
+const UserController = require('../controllers/userController')
+
 const User = require('../models/user');
 
-router.post('/signup',async(req,res)=>{ // users 값 저장이 0으로 됨
-    const location = req.body;
-    
-    if(!location){
-        res.status(statusCode.OK).send(util.fail(statusCode.fail(statusCode.BAD_REQUEST,responseMessage.NULL_VALUE)))
-    }
+router.post('/signup',UserController.signup)
 
-    const result = await User.signup(location);
-
-    res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.OK,{insertIdx:result}));
-})
+router.get('/', UserController.getUser)
 
 module.exports=router;

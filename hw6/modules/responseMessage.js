@@ -15,8 +15,8 @@ module.exports = {
     STORE_GET_FAIL:"상점 정보 값을 가져오는데 실패했습니다",
 
     //카테고리
-    BIG_CATEGORY_FAIL:"대 카테고리 데이터 반환 실패",
-    MIDDLE_CATEGORY_FAIL:"중 카테고리 데이터 반환 실패",
+   MAIN_CATEGORY_FAIL:"메인 카테고리 데이터 반환 실패",
+    SUB_CATEGORY_FAIL:"서브 카테고리 데이터 반환 실패",
 
     // 광고
     ADS_NULL:"광고 값이 없습니다.",

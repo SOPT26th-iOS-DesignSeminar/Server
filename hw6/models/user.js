@@ -4,10 +4,9 @@ const table = 'user';
 const user = {
     signup: async(location)=>{
         const fields = 'location';
-        const questions = '?';
         const value =[location];
 
-        const query = `INSERT INTO ${table}(${fields}) VALUES (${questions})`;
+        const query = `INSERT INTO ${table}(${fields}) VALUES (?)`;
 
         try{
             const result = await pool.queryParamArr(query,value);

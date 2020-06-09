@@ -6,16 +6,8 @@ let util = require('../modules/util');
 let statusCode = require('../modules/statusCode');
 let responseMessage = require('../modules/responseMessage');
 
-const Ads = require('../models/ads')
+const AdsController = require('../controllers/adsController')
 
-router.get('/',async(req,res)=>{
-    const result = await Ads.getAll();
-
-    if(result===0){
-        res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST,responseMessage.ADS_NULL))
-    }
-
-    res.status(statusCode.OK).send(util.success(util.success(statusCode.OK,responseMessage.ADS_SUCCESS,{result:result})))
-})
+router.get('/',AdsController.getAllAds)
 
 module.exports=router;
