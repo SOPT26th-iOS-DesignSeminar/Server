@@ -5,7 +5,7 @@ let Store = require('../models/store');
 
 let Sub_category = require('../models/sub_category')
 
-exports.signup = async(req,res)=>{
+exports.signup = 
     async (req,res)=>{
         const{
             sub_category_name,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee
@@ -16,15 +16,16 @@ exports.signup = async(req,res)=>{
     
         if(!name || !address || !avg_delivery_time || !cheeta_delivery || !rating || !introduce || !picture || !delivery_fee || !sub_category_idx){
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST,responseMessage.NULL_VALUE))
+            return;
         }
         const resultIdx = await Store.signup(sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee);
     
-        if(resultIdx===0){
+        if(resultIdx===-1){
             res.status(statusCode.BAD_REQUEST)
+            return;
         }
-        res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.STORE_SUCCESS,{insertIdx:resultIdx}));
+        return res.status(statusCode.OK).send(util.success(statusCode.OK,responseMessage.STORE_SUCCESS,{insertIdx:resultIdx}));
     } 
-}
 
 exports.getAll = async(req,res)=>{
     const result = await Store.getAll();

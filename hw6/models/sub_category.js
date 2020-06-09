@@ -29,11 +29,12 @@ const sub_category = {
         }
     },
     getIdxByName: async(name)=>{
-        const query = `SELECT * FROM ${table} WHERE name=${name}`;
+        const query = `SELECT * FROM ${table} WHERE name="${name}"`;
         try{
-            const result = await pool.queryParam(query);
-            const resultIdx = result[0].idx;
-            return resultIdx;
+            const result = await pool.queryParamArr(query);
+            console.log(result)
+            return result[0].idx;
+
         }catch(err){
             if(err.errno==1062){
                 console.log('signup error :',err.errno,err.code);

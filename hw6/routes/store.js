@@ -1,15 +1,14 @@
 var express = require('express')
 var router = express.Router();
 
-let Store = require('../models/store');
-let util = require('../modules/util');
-let statusCode = require('../modules/statusCode');
-let responseMessage = require('../modules/responseMessage');
+// let Store = require('../models/store');
+// let util = require('../modules/util');
+// let statusCode = require('../modules/statusCode');
+// let responseMessage = require('../modules/responseMessage');
 
 const StoreController = require('../controllers/storeController')
 
 router.post('/signup',StoreController.signup)
-
 router.get('/',StoreController.getAll)
 
 router.get('/name', StoreController.getStoreByName)

@@ -78,17 +78,20 @@ const store = {
     },
     getStoreByRating: async(sortIdx)=>{
         const query = `SELECT * FROM ${table} ORDER BY rating DESC`
-        let returnResult = [];
+        // let returnResult = [];
         try{
             const result = await pool.queryParam(query);
-            for(i=0;i<sortIdx.length;i++){
-                for(j=0;j<result.length;j++){
-                    if(sortIdx[i]===result[j].idx){
-                        returnResult.push(result[j])
-                    }
-                }
-            }
-            return resultResult;
+            console.log("result: ", result);
+            return result;
+            // const result = await pool.queryParam(query);
+            // for(i=0;i<sortIdx.length;i++){
+            //     for(j=0;j<result.length;j++){
+            //         if(sortIdx[i]===result[j].idx){
+            //             returnResult.push(result[j])
+            //         }
+            //     }
+            // }
+            // return returnResult;
         }catch(err){
             if(err.errno==1062){
                 console.log('getStoreByRating error :',err.errno,err.code);
