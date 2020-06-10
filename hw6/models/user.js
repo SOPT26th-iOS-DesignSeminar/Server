@@ -2,9 +2,9 @@ const pool = require('../modules/pool');
 const table = 'user';
 
 const user = {
-    signup: async(location)=>{
-        const fields = 'location';
-        const value =[location];
+    signup: async(location,x)=>{
+        const fields = 'location,x';
+        const value =[location,x];
 
         const query = `INSERT INTO ${table}(${fields}) VALUES (?)`;
 

@@ -2,11 +2,11 @@ const pool = require('../modules/pool')
 const table = 'store';
 
 const store = {
-    signup: async(sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee)=>{
+    signup: async(sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee,distance)=>{
 
-        const questions = '?,?,?,?,?,?,?,?,?';
-        const values = [sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee];
-        const fields = 'sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee'
+        const questions = '?,?,?,?,?,?,?,?,?,?';
+        const values = [sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee,distance];
+        const fields = 'sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee,distance'
 
         const query = `INSERT INTO ${table}(${fields}) VALUES (${questions})`;
 
@@ -47,10 +47,10 @@ const store = {
         console.log('getStoreByName err ',err);
         }
     },
-    update: async(idx,sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee)=>{
+    update: async(idx,sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee,distance)=>{
         
         const query = `UPDATE ${table} SET sub_category_idx=${sub_category_idx}, name="${name}", address="${address}", avg_delivery_time="${avg_delivery_time}",
-        cheeta_delivery="${cheeta_delivery}",rating="${rating}",introduce="${introduce}",picture="${picture}",delivery_fee="${delivery_fee}"
+        cheeta_delivery="${cheeta_delivery}",rating="${rating}",introduce="${introduce}",picture="${picture}",delivery_fee="${delivery_fee}",distance="${distance}"
         WHERE idx = "${idx}"`;
 
         try{

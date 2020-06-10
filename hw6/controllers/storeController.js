@@ -8,17 +8,17 @@ const Sub_category = require('../models/sub_category')
 exports.signup = 
     async (req,res)=>{
         const{
-            sub_category_name,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee
+            sub_category_name,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee,distance
         } = req.body;
 
         const sub_category_idx = await Sub_category.getIdxByName(sub_category_name);
         console.log(sub_category_idx)
     
-        if(!name || !address || !avg_delivery_time || !cheeta_delivery || !rating || !introduce || !picture || !delivery_fee || !sub_category_idx){
+        if(!name || !address || !avg_delivery_time || !cheeta_delivery || !rating || !introduce || !picture || !delivery_fee || !sub_category_idx || ! distance){
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST,responseMessage.NULL_VALUE))
             return;
         }
-        const resultIdx = await Store.signup(sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee);
+        const resultIdx = await Store.signup(sub_category_idx,name,address,avg_delivery_time,cheeta_delivery,rating,introduce,picture,delivery_fee,distance);
     
         if(resultIdx===-1){
             res.status(statusCode.BAD_REQUEST)
