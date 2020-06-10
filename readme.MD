@@ -15,7 +15,7 @@
 <br>
 
 ## EC2 TEST 
-![eee](https://user-images.githubusercontent.com/51740388/84224342-3b8e4b00-ab17-11ea-8069-8bb93a93e058.JPG)
+![eee](![ec2 test](https://user-images.githubusercontent.com/51740388/84225026-169ad780-ab19-11ea-84d1-dda63400992b.JPG))
 
 <br>
 
